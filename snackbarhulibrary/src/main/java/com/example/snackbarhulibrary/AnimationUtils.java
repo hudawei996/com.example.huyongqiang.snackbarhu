@@ -1,4 +1,4 @@
-package com.example.huyongqiang.snackbarhu;
+package com.example.snackbarhulibrary;
 
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.animation.Animation;

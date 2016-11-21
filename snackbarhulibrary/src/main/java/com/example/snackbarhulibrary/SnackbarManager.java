@@ -1,4 +1,4 @@
-package com.example.huyongqiang.snackbarhu;
+package com.example.snackbarhulibrary;
 
 import android.os.Handler;
 import android.os.Looper;

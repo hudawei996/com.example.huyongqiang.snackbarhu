@@ -1,4 +1,4 @@
-package com.example.huyongqiang.snackbarhu;
+package com.example.snackbarhulibrary;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
@@ -31,7 +32,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.animation.*;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -39,8 +41,6 @@ import android.widget.TextView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import android.support.design.widget.CoordinatorLayout;
 
 /**
  * Created by huyongqiang on 2016/11/17.
@@ -133,7 +133,7 @@ public class SnackbarHu {
 
     @NonNull
     public static SnackbarHu make(@NonNull View view, @NonNull CharSequence text,
-                                 @Duration int duration) {
+                                  @Duration int duration) {
         SnackbarHu snackbar = new SnackbarHu(findSuitableParent(view));
         snackbar.setText(text);
         snackbar.setDuration(duration);
@@ -223,10 +223,10 @@ public class SnackbarHu {
     /**
      * Overrides the max width of this snackbar's layout. This is typically not necessary; the snackbar
      * width will be according to Google's Material guidelines. Specifically, the max width will be
-     *
+     * <p>
      * To allow the snackbar to have a width equal to the parent view, set a value <= 0.
      *
-     * @param maxWidth  the max width in pixels
+     * @param maxWidth the max width in pixels
      * @return this SnackbarHu
      */
     public SnackbarHu setMaxWidth(int maxWidth) {
@@ -249,14 +249,12 @@ public class SnackbarHu {
     }
 
 
-
     private static float convertDpToPixel(float dp, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         float px = dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
         return px;
     }
-
 
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -279,7 +277,6 @@ public class SnackbarHu {
             throw new IllegalArgumentException("unsupported drawable type");
         }
     }
-
 
 
     @NonNull
@@ -453,8 +450,6 @@ public class SnackbarHu {
                 if (isShownOrQueued()) {
 
 
-
-
                     sHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -485,7 +480,7 @@ public class SnackbarHu {
             ViewCompat.setTranslationY(mView, -mView.getHeight());
             ViewCompat.animate(mView)
                     .translationY(0f)
-                    .setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR)
+                    .setInterpolator(com.example.snackbarhulibrary.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR)
                     .setDuration(ANIMATION_DURATION)
                     .setListener(new ViewPropertyAnimatorListenerAdapter() {
                         @Override
@@ -505,9 +500,9 @@ public class SnackbarHu {
                     })
                     .start();
         } else {
-            Animation anim = android.view.animation.AnimationUtils.loadAnimation(mView.getContext(),
+            Animation anim = AnimationUtils.loadAnimation(mView.getContext(),
                     R.anim.top_in);
-            anim.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
+            anim.setInterpolator(com.example.snackbarhulibrary.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
             anim.setDuration(ANIMATION_DURATION);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -535,7 +530,7 @@ public class SnackbarHu {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             ViewCompat.animate(mView)
                     .translationY(-mView.getHeight())
-                    .setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR)
+                    .setInterpolator(com.example.snackbarhulibrary.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR)
                     .setDuration(ANIMATION_DURATION)
                     .setListener(new ViewPropertyAnimatorListenerAdapter() {
                         @Override
@@ -550,8 +545,8 @@ public class SnackbarHu {
                     })
                     .start();
         } else {
-            Animation anim = android.view.animation.AnimationUtils.loadAnimation(mView.getContext(), R.anim.top_out);
-            anim.setInterpolator(AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
+            Animation anim = AnimationUtils.loadAnimation(mView.getContext(), R.anim.top_out);
+            anim.setInterpolator(com.example.snackbarhulibrary.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR);
             anim.setDuration(ANIMATION_DURATION);
             anim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
@@ -648,8 +643,6 @@ public class SnackbarHu {
             a.recycle();
 
             setClickable(true);
-
-
 
 
             LayoutInflater.from(context)
