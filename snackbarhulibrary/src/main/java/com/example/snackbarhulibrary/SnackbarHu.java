@@ -323,6 +323,12 @@ public class SnackbarHu {
         return this;
     }
 
+    @NonNull
+    public SnackbarHu setTextColor(@ColorInt int color) {
+        final TextView tv = mView.getMessageView();
+        tv.setTextColor(color);
+        return this;
+    }
 
     @NonNull
     public SnackbarHu setText(@NonNull CharSequence message) {

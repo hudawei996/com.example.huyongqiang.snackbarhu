@@ -15,14 +15,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show(View view) {
-        SnackbarHu.make(findViewById(R.id.button), "A Snackbar is a lightweight material" +
+        SnackbarHu snackbarHu = SnackbarHu.make(findViewById(R.id.button), "A Snackbar is a lightweight material" +
                 " design method for providing feedback to a user, " +
                 "while optionally providing an action to the user.", SnackbarHu.LENGTH_LONG).setAction("知道了", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(), "beidianji", Toast.LENGTH_SHORT).show();
             }
-        }).show();
+        });
+
+        snackbarHu.setTextColor(getResources().getColor(R.color.colorPrimary));
+        snackbarHu.show();
+
 
 
         /*final SnackbarHu snackbar = SnackbarHu.make(findViewById(R.id.button), "A Snackbar is a lightweight material design method for providing feedback to a user, while optionally providing an action to the user.", SnackbarHu.LENGTH_LONG);
